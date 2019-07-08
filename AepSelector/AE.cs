@@ -50,9 +50,22 @@ namespace BRY
 					m_ListBox.Items.AddRange(m_AfxPathsCap.ToArray());
 					m_ListBox.SelectedIndexChanged += M_ListBox_SelectedIndexChanged;
 					m_ListBox.KeyDown += M_ListBox_KeyDown;
+					m_ListBox.DoubleClick += M_ListBox_DoubleClick;
 				}
 			}
 		}
+
+		private void M_ListBox_DoubleClick(object sender, EventArgs e)
+		{
+			if(m_ListBox!=null)
+			{
+				if(m_ListBox.SelectedIndex>=0)
+				{
+					if (Exec()) Application.Exit();
+				}
+			}
+		}
+
 		public string AfxPath
 		{
 			get

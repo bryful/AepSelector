@@ -99,6 +99,7 @@
       <DependentUpon>AppInfoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DynamicJson.cs" />
+    <Compile Include="ExtentionSetup.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -65,6 +65,8 @@ namespace AepSelector
 			{
 				m_ae.AfxPath = afx;
 			}
+			GetCommand(System.Environment.GetCommandLineArgs());
+
 
 		}
 		//-------------------------------------------------------------
@@ -166,28 +168,40 @@ namespace AepSelector
 
 		}
 
+		private void edAep_TextChanged(object sender, EventArgs e)
+		{
 
-		/*
-private void button1_Click(object sender, EventArgs e)
-{
-	dynamic a = new DynamicJson();
-	a.fff = new string[] { "a", "B" };
-	a.fff = "12";
-	//a.fff = new { aaa=12, ccc="www" };
+		}
 
-	MessageBox.Show(a.fff.GetType().ToString());
+		private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
 
-	JsonPref s = new JsonPref();
-	s.AddInt("aaa", 99);
-	string ss = s.ToJson();
-	MessageBox.Show(ss);
-	s.Parse(ss);
-	string sss = s.ToJson();
-	MessageBox.Show(sss);
+		private void setupExtentionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Extention ext = new Extention();
+			ext.ext = ".aep";
+			ext.fileType = Application.ProductName;
+			ext.description = "AepSelector : AE Version selector";
+			ext.iconIndex = 1;
 
-	int i = s.GetInt("aaa");
-	MessageBox.Show(String.Format("{0}", i));
-}
-*/
+			ExtentionSetup exs = new ExtentionSetup();
+			exs.Add(ext);
+			exs.Inst();
+		}
+
+		private void unsetExtentionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Extention ext = new Extention();
+			ext.ext = ".aep";
+			ext.fileType = Application.ProductName;
+			ext.description = "AepSelector : AE Version selector";
+			ext.iconIndex = 1;
+
+			ExtentionSetup exs = new ExtentionSetup();
+			exs.Add(ext);
+			exs.Uninst();
+		}
 	}
 }
