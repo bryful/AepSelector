@@ -28,8 +28,9 @@ namespace BRY
 			@"C:\Program Files\Adobe\Adobe After Effects CC 2017\Support Files\AfterFX.exe",
 			@"C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files\AfterFX.exe",
 			@"C:\Program Files\Adobe\Adobe After Effects CC 2019\Support Files\AfterFX.exe",
-			@"C:\Program Files\Adobe\Adobe After Effects CC 2020\Support Files\AfterFX.exe",
-			@"C:\Program Files\Adobe\Adobe After Effects CC 2021\Support Files\AfterFX.exe"
+			@"C:\Program Files\Adobe\Adobe After Effects 2020\Support Files\AfterFX.exe",
+			@"C:\Program Files\Adobe\Adobe After Effects 2021\Support Files\AfterFX.exe",
+			@"C:\Program Files\Adobe\Adobe After Effects 2022\Support Files\AfterFX.exe"
 
 		};
 		private List<string> m_AfxPaths = new List<string>();
