@@ -1,47 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using Microsoft.VisualBasic.ApplicationServices;
+﻿using BRY;
 
 namespace AepSelector
 {
-	public class MyApp : WindowsFormsApplicationBase
+	public enum StartupCmd
 	{
-		public MyApp()
-		: base()
-		{
-			this.EnableVisualStyles = true;
-			this.IsSingleInstance = true;
-			this.MainForm = new Form1();//スタートアップフォームを設定
-			this.StartupNextInstance += new StartupNextInstanceEventHandler(MyApplication_StartupNextInstance);
-		}
-		public void MyApplication_StartupNextInstance(object sender, StartupNextInstanceEventArgs e)
-		{
-			//ここに二重起動されたときの処理を書く
-			//e.CommandLineでコマンドライン引数を取得出来る
-			Form1 f = (Form1)this.MainForm;
-			f.GetCommand(e.CommandLine.ToArray<string>());
-		}
+		None = 0,
+		IsRunning,
+		StartProcess
 	}
-	static class Program
+
+	internal static class Program
 	{
-		/// <summary>
-		/// アプリケーションのメイン エントリ ポイントです。
-		/// </summary>
+		private const string ApplicationId = "AepSelector"; // GUIDなどユニークなもの
+		private static System.Threading.Mutex _mutex = new System.Threading.Mutex(false, ApplicationId);
+
+		// *******************************************************************************************
 		[STAThread]
 		static void Main(string[] args)
 		{
-			//下の3行を復活させれば多重起動ができる
-			//Application.EnableVisualStyles();
-			//Application.SetCompatibleTextRenderingDefault(false);
+			// 通常の起動
+			//ApplicationConfiguration.Initialize();
 			//Application.Run(new Form1());
 
-			MyApp winAppBase = new MyApp();
-			winAppBase.Run(args);
+			if (_mutex.WaitOne(0, false))
+			{//起動していない
+				MainForm._execution = true;
+				MainForm.ArgumentPipeServer(ApplicationId);
+				ApplicationConfiguration.Initialize();
+				Application.Run(new MainForm());
+				MainForm._execution = false;
+			}
+			else
+			{ //起動している
+			  //MessageBox.Show("すでに起動しています",
+			  //				ApplicationId,
+			  //				MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+				MainForm.ArgumentPipeClient(ApplicationId, args).Wait();
+			}
 		}
 	}
-
 }

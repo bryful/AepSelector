@@ -42,7 +42,7 @@
 			this.edAfx.ItemHeight = 16;
 			this.edAfx.Location = new System.Drawing.Point(12, 41);
 			this.edAfx.Name = "edAfx";
-			this.edAfx.Size = new System.Drawing.Size(495, 132);
+			this.edAfx.Size = new System.Drawing.Size(484, 116);
 			this.edAfx.TabIndex = 2;
 			// 
 			// edAep
@@ -53,7 +53,7 @@
 			this.edAep.Location = new System.Drawing.Point(12, 12);
 			this.edAep.Name = "edAep";
 			this.edAep.ReadOnly = true;
-			this.edAep.Size = new System.Drawing.Size(495, 23);
+			this.edAep.Size = new System.Drawing.Size(484, 23);
 			this.edAep.TabIndex = 3;
 			this.edAep.TextChanged += new System.EventHandler(this.edAep_TextChanged);
 			// 
@@ -62,7 +62,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(515, 187);
+			this.ClientSize = new System.Drawing.Size(504, 172);
 			this.Controls.Add(this.edAep);
 			this.Controls.Add(this.edAfx);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
