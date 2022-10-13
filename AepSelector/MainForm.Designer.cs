@@ -32,9 +32,8 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.aeIconPanel1 = new AepSelector.AEIconPanel();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.iconInstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.iconUnInstallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.autoQuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -57,35 +56,29 @@
 			// 
 			this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(50)))));
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iconInstToolStripMenuItem,
-            this.iconUnInstallToolStripMenuItem,
+            this.autoQuitToolStripMenuItem,
             this.quitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(144, 70);
-			// 
-			// iconInstToolStripMenuItem
-			// 
-			this.iconInstToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.iconInstToolStripMenuItem.Name = "iconInstToolStripMenuItem";
-			this.iconInstToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-			this.iconInstToolStripMenuItem.Text = "IconInstall";
-			this.iconInstToolStripMenuItem.Click += new System.EventHandler(this.iconInstToolStripMenuItem_Click);
-			// 
-			// iconUnInstallToolStripMenuItem
-			// 
-			this.iconUnInstallToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.iconUnInstallToolStripMenuItem.Name = "iconUnInstallToolStripMenuItem";
-			this.iconUnInstallToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-			this.iconUnInstallToolStripMenuItem.Text = "IconUnInstall";
-			this.iconUnInstallToolStripMenuItem.Click += new System.EventHandler(this.iconUnInstallToolStripMenuItem_Click);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
 			// 
 			// quitToolStripMenuItem
 			// 
 			this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
 			this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-			this.quitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.quitToolStripMenuItem.Text = "Quit";
 			this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
+			// 
+			// autoQuitToolStripMenuItem
+			// 
+			this.autoQuitToolStripMenuItem.Checked = true;
+			this.autoQuitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.autoQuitToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.autoQuitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.autoQuitToolStripMenuItem.Name = "autoQuitToolStripMenuItem";
+			this.autoQuitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.autoQuitToolStripMenuItem.Text = "実行後終了";
+			this.autoQuitToolStripMenuItem.Click += new System.EventHandler(this.autoQuitToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -113,8 +106,7 @@
 
 		private AEIconPanel aeIconPanel1;
 		private ContextMenuStrip contextMenuStrip1;
-		private ToolStripMenuItem iconInstToolStripMenuItem;
 		private ToolStripMenuItem quitToolStripMenuItem;
-		private ToolStripMenuItem iconUnInstallToolStripMenuItem;
+		private ToolStripMenuItem autoQuitToolStripMenuItem;
 	}
 }

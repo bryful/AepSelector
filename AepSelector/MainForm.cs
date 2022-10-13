@@ -79,7 +79,17 @@ namespace AepSelector
 				if (m_AEIconPanel != null)
 				{
 					string ap = pf.GetValueString("AfterFX", out ok);
-					m_AEIconPanel.AfterFXPath = ap;
+					if(ok) m_AEIconPanel.AfterFXPath = ap;
+					bool b = pf.GetValueBool("AutoQuit", out ok);
+					if (ok)
+					{
+						autoQuitToolStripMenuItem.Checked = b;
+						m_AEIconPanel.AutoQuit = b;
+					}
+					else
+					{
+						autoQuitToolStripMenuItem.Checked = m_AEIconPanel.AutoQuit ;
+					}
 				}
 
 			}
@@ -95,6 +105,7 @@ namespace AepSelector
 			if(m_AEIconPanel != null)
 			{
 				pf.SetValue("AfterFX", m_AEIconPanel.AfterFXPath);
+				pf.SetValue("AutoQuit", m_AEIconPanel.AutoQuit);
 			}
 			pf.Save();
 		}
@@ -325,6 +336,17 @@ namespace AepSelector
 				ExtentionSetup exs = new ExtentionSetup();
 				exs.Add(ext);
 				exs.Uninst();
+			}
+		}
+
+		private void autoQuitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ToolStripMenuItem item =(ToolStripMenuItem)sender;
+
+			item.Checked = !item.Checked;
+			if(m_AEIconPanel!=null)
+			{
+				m_AEIconPanel.AutoQuit = item.Checked;
 			}
 		}
 	}

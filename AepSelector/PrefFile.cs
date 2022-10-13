@@ -251,8 +251,11 @@ namespace BRY
 			{
 				try
 				{
-					ret = m_data[key].GetValue<bool>();
-					ok = true;
+					if (m_data.ContainsKey(key))
+					{
+						ret = m_data[key].GetValue<bool>();
+						ok = true;
+					}
 				}
 				catch
 				{

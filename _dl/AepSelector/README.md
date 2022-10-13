@@ -1,10 +1,11 @@
 # AepSelector
+  
 複数のバージョンのAfter Effectsを切り替えて起動するアプリ  
-
+  
+バージョンアップしました。  
 
 # Dependency
-Visual studio 2017 C#
-DynamicJson
+Visual studio 2022 C#
 
 
 # Setup
@@ -15,13 +16,27 @@ DynamicJson
  * 全般タブのプログラムの変更ボタンを押す。
  * そこでAepSelector.exeを指定。　Windows10の場合は「このPCで別をアプリを探す」で
 
+
+# Usage
+
+aepの拡張子割り当てをこのアプリにすれば、aepダブルクリックでバージョンを選ぶダイアログが表示されます。  
+起動したいバージョンのアイコンをダブルクリックで読み込みます。  
+  
+アプリを起動させて、各バージョンのアイコンにaepファイルをD&DしてもOKです。
+  
+アプリのアイコンにD&Dしても大丈夫です。  
+  
+右クリックでメニューが出ます。実行したら終了する、しないを設定できます。
+
+
+
 # License
 
-This software is released under the MIT License, see LICENSE
+This software is released under the MIT License, see LICENSE.
 
 # Authors
 
-bry-ful(Hiroshi Furuhashi) http://bryful.yuzu.bz/  
+bry-ful(Hiroshi Furuhashi)   
 twitter:[bryful](https://twitter.com/bryful)  
 bryful@gmail.com  
 

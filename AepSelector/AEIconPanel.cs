@@ -14,6 +14,7 @@ namespace AepSelector
 {
 	public partial class AEIconPanel : Control
 	{
+		public bool AutoQuit = false;
 		public delegate void AepChangedHandler(object sender, StringChangeArgs e);
 		public event AepChangedHandler? AepChanged = null;
 
@@ -180,6 +181,8 @@ namespace AepSelector
 				proc.StartInfo.Arguments = "\"" + aep + "\"";
 			}
 			proc.Start();
+			if(AutoQuit) Application.Exit();	
+			ClearAepPath();
 			ret = true;
 			return ret;
 		}
@@ -240,6 +243,15 @@ namespace AepSelector
 			m_AepPath = s;
 			m_Caption= Path.GetFileName(s);
 			OnAepChanged(new StringChangeArgs(m_Caption));
+		}
+		public void ClearAepPath()
+		{
+			if (m_AepPath != "")
+			{
+				m_AepPath = "";
+				m_Caption = "";
+				OnAepChanged(new StringChangeArgs(m_Caption));
+			}
 		}
 		protected override void OnPaint(PaintEventArgs pe)
 		{
