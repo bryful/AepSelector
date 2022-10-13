@@ -49,6 +49,22 @@ namespace AepSelector
 
 		}; [DllImport("user32.dll")]
 		private static extern IntPtr SetFocus(IntPtr hWnd);
+		private Form? m_form = null;
+		public Form? Form
+		{
+			get { return m_form; }
+			set
+			{
+				m_form = value;
+				if(m_form != null)
+				{
+					if (m_form is AEForm)
+					{
+						((AEForm)m_form).AEIconPanel = this;
+					}
+				}
+			}
+		}
 
 
 		private string m_AepPath = "";

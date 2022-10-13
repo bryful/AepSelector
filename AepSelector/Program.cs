@@ -24,11 +24,11 @@ namespace AepSelector
 
 			if (_mutex.WaitOne(0, false))
 			{//起動していない
-				MainForm._execution = true;
-				MainForm.ArgumentPipeServer(ApplicationId);
+				AEForm._execution = true;
+				AEForm.ArgumentPipeServer(ApplicationId);
 				ApplicationConfiguration.Initialize();
 				Application.Run(new MainForm());
-				MainForm._execution = false;
+				AEForm._execution = false;
 			}
 			else
 			{ //起動している
@@ -36,7 +36,7 @@ namespace AepSelector
 			  //				ApplicationId,
 			  //				MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
-				MainForm.ArgumentPipeClient(ApplicationId, args).Wait();
+				AEForm.ArgumentPipeClient(ApplicationId, args).Wait();
 			}
 		}
 	}
