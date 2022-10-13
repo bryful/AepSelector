@@ -1,0 +1,5 @@
+#define IDI_ICON1 101
+#define IDI_ICON2 102
+
+IDI_ICON1 ICON "Icon.ico"
+IDI_ICON2 ICON "doc.ico"

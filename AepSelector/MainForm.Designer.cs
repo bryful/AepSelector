@@ -28,182 +28,93 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			this.aeIconPanel1 = new AepSelector.AEIconPanel();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.iconInstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.iconUnInstallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exec1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exec2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.aeIcon1 = new AepSelector.AEIcon();
-			this.menuStrip1.SuspendLayout();
+			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// menuStrip1
+			// aeIconPanel1
 			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.helpToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-			this.menuStrip1.Size = new System.Drawing.Size(607, 25);
-			this.menuStrip1.TabIndex = 3;
-			this.menuStrip1.Text = "menuStrip1";
+			this.aeIconPanel1.AepPath = "";
+			this.aeIconPanel1.AfterFXPath = "";
+			this.aeIconPanel1.BackColor = System.Drawing.Color.Transparent;
+			this.aeIconPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.aeIconPanel1.Location = new System.Drawing.Point(12, 19);
+			this.aeIconPanel1.MaximumSize = new System.Drawing.Size(320, 64);
+			this.aeIconPanel1.MinimumSize = new System.Drawing.Size(320, 64);
+			this.aeIconPanel1.Name = "aeIconPanel1";
+			this.aeIconPanel1.Size = new System.Drawing.Size(320, 64);
+			this.aeIconPanel1.TabIndex = 0;
+			this.aeIconPanel1.TargetIndex = -1;
+			this.aeIconPanel1.Text = "aeIconPanel1";
 			// 
-			// fileToolStripMenuItem
+			// contextMenuStrip1
 			// 
-			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
+			this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(50)))));
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iconInstToolStripMenuItem,
+            this.iconUnInstallToolStripMenuItem,
             this.quitToolStripMenuItem});
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
-			this.fileToolStripMenuItem.Text = "File";
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(144, 70);
 			// 
-			// openToolStripMenuItem
+			// iconInstToolStripMenuItem
 			// 
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-			this.openToolStripMenuItem.Text = "Open";
+			this.iconInstToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.iconInstToolStripMenuItem.Name = "iconInstToolStripMenuItem";
+			this.iconInstToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.iconInstToolStripMenuItem.Text = "IconInstall";
+			this.iconInstToolStripMenuItem.Click += new System.EventHandler(this.iconInstToolStripMenuItem_Click);
 			// 
-			// saveToolStripMenuItem
+			// iconUnInstallToolStripMenuItem
 			// 
-			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-			this.saveToolStripMenuItem.Text = "Save";
-			// 
-			// saveAsToolStripMenuItem
-			// 
-			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-			this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-			this.saveAsToolStripMenuItem.Text = "SaveAs";
+			this.iconUnInstallToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.iconUnInstallToolStripMenuItem.Name = "iconUnInstallToolStripMenuItem";
+			this.iconUnInstallToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.iconUnInstallToolStripMenuItem.Text = "IconUnInstall";
+			this.iconUnInstallToolStripMenuItem.Click += new System.EventHandler(this.iconUnInstallToolStripMenuItem_Click);
 			// 
 			// quitToolStripMenuItem
 			// 
+			this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
 			this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-			this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.quitToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.quitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.quitToolStripMenuItem.Text = "Quit";
-			this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-			// 
-			// editToolStripMenuItem
-			// 
-			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exec1ToolStripMenuItem,
-            this.exec2ToolStripMenuItem});
-			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 19);
-			this.editToolStripMenuItem.Text = "Edit";
-			// 
-			// exec1ToolStripMenuItem
-			// 
-			this.exec1ToolStripMenuItem.Name = "exec1ToolStripMenuItem";
-			this.exec1ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-			this.exec1ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-			this.exec1ToolStripMenuItem.Text = "Exec1";
-			// 
-			// exec2ToolStripMenuItem
-			// 
-			this.exec2ToolStripMenuItem.Name = "exec2ToolStripMenuItem";
-			this.exec2ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-			this.exec2ToolStripMenuItem.Text = "Exec2";
-			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 19);
-			this.helpToolStripMenuItem.Text = "Help";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-			this.aboutToolStripMenuItem.Text = "About";
-			// 
-			// statusStrip1
-			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 375);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(607, 22);
-			this.statusStrip1.TabIndex = 4;
-			this.statusStrip1.Text = "statusStrip1";
-			// 
-			// textBox1
-			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.Location = new System.Drawing.Point(12, 28);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(586, 128);
-			this.textBox1.TabIndex = 5;
-			// 
-			// aeIcon1
-			// 
-			this.aeIcon1.BackColor = System.Drawing.Color.Black;
-			this.aeIcon1.Font = new System.Drawing.Font("Swis721 Md BT", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.aeIcon1.ForeColor = System.Drawing.Color.White;
-			this.aeIcon1.Location = new System.Drawing.Point(270, 187);
-			this.aeIcon1.MaximumSize = new System.Drawing.Size(64, 64);
-			this.aeIcon1.MinimumSize = new System.Drawing.Size(64, 64);
-			this.aeIcon1.Name = "aeIcon1";
-			this.aeIcon1.Size = new System.Drawing.Size(64, 64);
-			this.aeIcon1.TabIndex = 6;
-			this.aeIcon1.Text = "aeIcon1";
+			this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(607, 397);
-			this.Controls.Add(this.aeIcon1);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.menuStrip1);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(60)))));
+			this.ClientSize = new System.Drawing.Size(341, 95);
+			this.ContextMenuStrip = this.contextMenuStrip1;
+			this.Controls.Add(this.aeIconPanel1);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.MainMenuStrip = this.menuStrip1;
+			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "MainForm";
 			this.Text = "Form1";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
 			this.Load += new System.EventHandler(this.Form1_Load);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
-		private MenuStrip menuStrip1;
-		private ToolStripMenuItem fileToolStripMenuItem;
+
+		private AEIconPanel aeIconPanel1;
+		private ContextMenuStrip contextMenuStrip1;
+		private ToolStripMenuItem iconInstToolStripMenuItem;
 		private ToolStripMenuItem quitToolStripMenuItem;
-		private StatusStrip statusStrip1;
-		private TextBox textBox1;
-		private ToolStripMenuItem openToolStripMenuItem;
-		private ToolStripMenuItem saveToolStripMenuItem;
-		private ToolStripMenuItem saveAsToolStripMenuItem;
-		private ToolStripMenuItem editToolStripMenuItem;
-		private ToolStripMenuItem exec1ToolStripMenuItem;
-		private ToolStripMenuItem exec2ToolStripMenuItem;
-		private ToolStripMenuItem helpToolStripMenuItem;
-		private ToolStripMenuItem aboutToolStripMenuItem;
-		private AEIcon aeIcon1;
+		private ToolStripMenuItem iconUnInstallToolStripMenuItem;
 	}
 }

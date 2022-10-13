@@ -71,9 +71,12 @@ namespace BRY
 			{
 				try
 				{
-					ret.X = m_data[key]["X"].GetValue<int>();
-					ret.Y = m_data[key]["Y"].GetValue<int>();
-					ok = true;
+					if (m_data.ContainsKey(key))
+					{
+						ret.X = m_data[key]["X"].GetValue<int>();
+						ret.Y = m_data[key]["Y"].GetValue<int>();
+						ok = true;
+					}
 				}
 				catch
 				{
@@ -131,8 +134,11 @@ namespace BRY
 			{
 				try
 				{
-					ret = m_data[key].GetValue<string>();
-					ok = true;
+					if (m_data.ContainsKey(key))
+					{
+						ret = m_data[key].GetValue<string>();
+						ok = true;
+					}
 				}
 				catch
 				{
