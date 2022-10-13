@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Platforms>AnyCPU;x64;x86</Platforms>
-    <Win32Resource>C:\Users\did-furuhashi\source\repos\AepSelector\icon\Icon.res</Win32Resource>
+    <Win32Resource>.\Icon.res</Win32Resource>
     <UseWPF>False</UseWPF>
   </PropertyGroup>
 

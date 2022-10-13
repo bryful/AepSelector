@@ -68,13 +68,13 @@ namespace AepSelector
 			{
 				bool ok = false;
 				Point p = pf.GetPoint("Location", out ok);
-				if (ok)
+				if ((ok)&& (PrefFile.ScreenIn(this.Bounds) == true))
 				{
-
-					if (PrefFile.ScreenIn(this.Bounds) == true)
-					{
-						this.Location = p;
-					}
+					this.Location = p;
+				}
+				else
+				{
+					ToCenter();
 				}
 				if (m_AEIconPanel != null)
 				{
@@ -93,6 +93,10 @@ namespace AepSelector
 				}
 
 			}
+			else
+			{
+				ToCenter();
+			}
 			//
 			Command(Environment.GetCommandLineArgs().Skip(1).ToArray(), PIPECALL.StartupExec);
 			//this.Text = nameof(MainForm.Parent) + "/aa";
@@ -108,6 +112,13 @@ namespace AepSelector
 				pf.SetValue("AutoQuit", m_AEIconPanel.AutoQuit);
 			}
 			pf.Save();
+		}
+		// ********************************************************************
+		public void ToCenter()
+		{
+			Rectangle rct = Screen.PrimaryScreen.Bounds;
+			Point p = new Point((rct.Width - this.Width) / 2, (rct.Height - this.Height) / 2);
+			this.Location = p;
 		}
 		// ********************************************************************
 		private void quitToolStripMenuItem_Click(object sender, EventArgs e)
