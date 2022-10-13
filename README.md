@@ -4,9 +4,10 @@
   
 バージョンアップしました。  
 
+DL:[AepSelector.zip](https://bit.ly/3g3VLnU)  
+
 # Dependency
 Visual studio 2022 C#
-
 
 # Setup
 好きな場所へコピーして、デスクトップなりにショートカットを作成しておく。
