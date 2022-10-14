@@ -1,5 +1,6 @@
 ﻿using BRY;
 using System.IO.Pipes;
+using System.Runtime.InteropServices;
 
 namespace AepSelector
 {
@@ -13,6 +14,9 @@ namespace AepSelector
 	{
 		public static bool _execution = true;
 
+		[DllImport("user32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		private static extern bool SetForegroundWindow(IntPtr hWnd); 
 		public AEForm()
 		{
 			InitializeComponent();
@@ -146,6 +150,7 @@ namespace AepSelector
 					}
 				}
 			}
+			SetForegroundWindow(this.Handle);
 		}
 		private Point m_MD = new Point(0, 0);
 		// *******************************************************************************
