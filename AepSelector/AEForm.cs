@@ -27,17 +27,15 @@ namespace AepSelector
 		public void ChkSize()
 		{
 			if (m_AEIconPanel == null) return;
-			m_AEIconPanel.ChkSize();
-			int w = m_AEIconPanel.Width + m_SideMargin * 2;
-			int h = m_AEIconPanel.Height + m_CaptiobHeight;
+			Size sz = m_AEIconPanel.ChkSize();
+			int w = sz.Width +m_SideMargin*2;
+			int h = sz.Height + m_CaptiobHeight;
 			int w2 = 64*3 + m_SideMargin * 2;
 			if (w < w2) w = w2;
 			this.MinimumSize = new Size(0, 0);
 			this.MaximumSize = new Size(0, 0);
-
 			this.Size = new Size(w,h);
 			m_AEIconPanel.Location = new Point(m_SideMargin, m_CaptiobHeight);
-
 		}
 		// ********************************************************************
 		private AEIconPanel? m_AEIconPanel = null;
@@ -64,22 +62,15 @@ namespace AepSelector
 		// ********************************************************************
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			PrefFile pf = new PrefFile();
+			PrefFile pf = new PrefFile(this);
 			this.Text = pf.AppName;
 			if (pf.Load() == true)
 			{
-				bool ok = false;
-				Point p = pf.GetPoint("Location", out ok);
-				if ((ok)&& (PrefFile.ScreenIn(this.Bounds) == true))
-				{
-					this.Location = p;
-				}
-				else
-				{
-					ToCenter();
-				}
+				pf.RestoreLoc();
+
 				if (m_AEIconPanel != null)
 				{
+					bool ok=false;
 					string ap = pf.GetValueString("AfterFX", out ok);
 					if(ok) m_AEIconPanel.AfterFXPath = ap;
 					bool b = pf.GetValueBool("AutoQuit", out ok);
@@ -100,14 +91,15 @@ namespace AepSelector
 				ToCenter();
 			}
 			//
+			ChkSize();
 			Command(Environment.GetCommandLineArgs().Skip(1).ToArray(), PIPECALL.StartupExec);
 			//this.Text = nameof(MainForm.Parent) + "/aa";
 		}
 		// ********************************************************************
 		private void Form1_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			PrefFile pf = new PrefFile();
-			pf.SetPoint("Location", this.Location);
+			PrefFile pf = new PrefFile(this);
+			pf.StoreLoc();
 			if(m_AEIconPanel != null)
 			{
 				pf.SetValue("AfterFX", m_AEIconPanel.AfterFXPath);
@@ -315,7 +307,7 @@ namespace AepSelector
 		{
 			if (IsAdministrator() == false)
 			{
-
+				MessageBox.Show($"管理者権限で実行してください {Application.ProductName}");
 			}
 			else
 			{
@@ -336,7 +328,7 @@ namespace AepSelector
 		{
 			if (IsAdministrator() == false)
 			{
-
+				MessageBox.Show($"管理者権限で実行してください {Application.ProductName}");
 			}
 			else
 			{

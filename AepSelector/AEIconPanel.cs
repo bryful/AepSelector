@@ -49,6 +49,7 @@ namespace AepSelector
 
 		}; [DllImport("user32.dll")]
 		private static extern IntPtr SetFocus(IntPtr hWnd);
+		/*
 		private Form? m_form = null;
 		public Form? Form
 		{
@@ -65,7 +66,7 @@ namespace AepSelector
 				}
 			}
 		}
-
+		*/
 
 		private string m_AepPath = "";
 
@@ -237,20 +238,23 @@ namespace AepSelector
 			}
 			ChkSize();
 		}
-		public void ChkSize()
+		public Size ChkSize()
 		{
+			Size ret = new Size(0,0);
 			int cnt = this.Controls.Count;
 			if (cnt > 0)
 			{
-				this.Size = new Size(cnt * this.Controls[0].Width, this.Controls[0].Height);
-				this.MinimumSize = this.Size;
-				this.MaximumSize = this.Size;
+				ret = new Size(cnt * this.Controls[0].Width, this.Controls[0].Height);
+				this.Size = ret;
+				this.MinimumSize = ret;
+				this.MaximumSize = new Size(0, 0);
 			}
 			else
 			{
 				this.MinimumSize = new Size(0, 0);
 				this.MaximumSize = new Size(0, 0);
 			}
+			return ret;
 		}
 		public void SetAepPath(string s)
 		{

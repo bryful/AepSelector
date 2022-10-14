@@ -37,12 +37,9 @@
 			this.aeIconPanel1.AfterFXPath = "";
 			this.aeIconPanel1.BackColor = System.Drawing.Color.Transparent;
 			this.aeIconPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.aeIconPanel1.Form = null;
-			this.aeIconPanel1.Location = new System.Drawing.Point(12, 24);
-			this.aeIconPanel1.MaximumSize = new System.Drawing.Size(256, 64);
-			this.aeIconPanel1.MinimumSize = new System.Drawing.Size(256, 64);
+			this.aeIconPanel1.Location = new System.Drawing.Point(8, 24);
 			this.aeIconPanel1.Name = "aeIconPanel1";
-			this.aeIconPanel1.Size = new System.Drawing.Size(256, 64);
+			this.aeIconPanel1.Size = new System.Drawing.Size(349, 64);
 			this.aeIconPanel1.TabIndex = 0;
 			this.aeIconPanel1.TargetIndex = -1;
 			this.aeIconPanel1.Text = "aeIconPanel1";
@@ -52,7 +49,7 @@
 			this.AEIconPanel = this.aeIconPanel1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(272, 88);
+			this.ClientSize = new System.Drawing.Size(384, 88);
 			this.Controls.Add(this.aeIconPanel1);
 			this.Name = "MainForm";
 			this.Text = "MainForm";
