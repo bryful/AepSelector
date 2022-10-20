@@ -189,6 +189,15 @@ namespace AepSelector
 		private Color m_CaptionColor = Color.FromArgb(255, 0, 0, 15);
 
 		// *******************************************************************************
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			base.OnKeyDown(e);
+			if(e.KeyData == Keys.Escape)
+			{
+				Application.Exit();
+			}
+		}
+		// *******************************************************************************
 		protected override void OnPaint(PaintEventArgs e)
 		{
 
