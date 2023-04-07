@@ -1,26 +1,46 @@
 ﻿using BRY;
+using System.Diagnostics;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
 
 namespace AepSelector
 {
-	public enum PIPECALL
-	{
-		StartupExec,
-		DoubleExec
-	}
 
 	public partial class AEForm : Form
 	{
-		public static bool _execution = true;
-
+		// ********************************************************************
+		private F_Pipe m_Server = new F_Pipe();
+		public void StartServer(string pipename)
+		{
+			m_Server.Server(pipename);
+			m_Server.Reception += (sender, e) =>
+			{
+				this.Invoke((Action)(() =>
+				{
+					PipeData pd = new PipeData(e.Text);
+					Command(pd.Args, PIPECALL.PipeExec);
+					this.Activate();
+				}));
+			};
+		}
+		// ********************************************************************
+		public void StopServer()
+		{
+			m_Server.StopServer();
+		}
+		// ********************************************************************
 		[DllImport("user32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		private static extern bool SetForegroundWindow(IntPtr hWnd); 
+		private static extern bool SetForegroundWindow(IntPtr hWnd);
 		public AEForm()
 		{
 			InitializeComponent();
 			//this.AEIconPanel = aeIconPanel1;
+
+			contextMenuStrip1.Click += (sender, e) =>
+			{
+				topMostToolStripMenuItem.Checked = this.TopMost;
+			};
 		}
 		protected override void InitLayout()
 		{
@@ -32,13 +52,13 @@ namespace AepSelector
 		{
 			if (m_AEIconPanel == null) return;
 			Size sz = m_AEIconPanel.ChkSize();
-			int w = sz.Width +m_SideMargin*2;
+			int w = sz.Width + m_SideMargin * 2;
 			int h = sz.Height + m_CaptiobHeight;
-			int w2 = 64*3 + m_SideMargin * 2;
+			int w2 = 64 * 3 + m_SideMargin * 2;
 			if (w < w2) w = w2;
 			this.MinimumSize = new Size(0, 0);
 			this.MaximumSize = new Size(0, 0);
-			this.Size = new Size(w,h);
+			this.Size = new Size(w, h);
 			m_AEIconPanel.Location = new Point(m_SideMargin, m_CaptiobHeight);
 		}
 		// ********************************************************************
@@ -46,7 +66,7 @@ namespace AepSelector
 		public AEIconPanel? AEIconPanel
 		{
 			get { return m_AEIconPanel; }
-			set 
+			set
 			{
 				m_AEIconPanel = value;
 				if (m_AEIconPanel != null)
@@ -71,12 +91,11 @@ namespace AepSelector
 			if (pf.Load() == true)
 			{
 				pf.RestoreLoc();
-
+				bool ok = false;
 				if (m_AEIconPanel != null)
 				{
-					bool ok=false;
 					string ap = pf.GetValueString("AfterFX", out ok);
-					if(ok) m_AEIconPanel.AfterFXPath = ap;
+					if (ok) m_AEIconPanel.AfterFXPath = ap;
 					bool b = pf.GetValueBool("AutoQuit", out ok);
 					if (ok)
 					{
@@ -85,10 +104,15 @@ namespace AepSelector
 					}
 					else
 					{
-						autoQuitToolStripMenuItem.Checked = m_AEIconPanel.AutoQuit ;
+						autoQuitToolStripMenuItem.Checked = m_AEIconPanel.AutoQuit;
 					}
 				}
-
+				bool b2 = pf.GetValueBool("TopMost", out ok);
+				if (ok)
+				{
+					this.TopMost = b2;
+					topMostToolStripMenuItem.Checked = b2;
+				}
 			}
 			else
 			{
@@ -104,11 +128,12 @@ namespace AepSelector
 		{
 			PrefFile pf = new PrefFile(this);
 			pf.StoreLoc();
-			if(m_AEIconPanel != null)
+			if (m_AEIconPanel != null)
 			{
 				pf.SetValue("AfterFX", m_AEIconPanel.AfterFXPath);
 				pf.SetValue("AutoQuit", m_AEIconPanel.AutoQuit);
 			}
+			pf.SetValue("TopMost", this.TopMost);
 			pf.Save();
 		}
 		// ********************************************************************
@@ -131,16 +156,17 @@ namespace AepSelector
 			}
 			else
 			{
-				foreach(string arg in args)
+				foreach (string arg in args)
 				{
-					if(File.Exists(arg))
+					if (File.Exists(arg))
 					{
 						string e = Path.GetExtension(arg).ToLower();
-						if(e==".aep")
+						if (e == ".aep")
 						{
 							if (m_AEIconPanel != null)
 							{
-								this.Invoke((Action)(() => {
+								this.Invoke((Action)(() =>
+								{
 									m_AEIconPanel.AepPath = arg;
 									this.Text = m_AEIconPanel.Caption;
 								}));
@@ -160,7 +186,7 @@ namespace AepSelector
 			{
 				int x = e.X;
 				int y = e.Y;
-				if((x>=this.Width-m_CaptiobHeight)&&(y< m_CaptiobHeight))
+				if ((x >= this.Width - m_CaptiobHeight) && (y < m_CaptiobHeight))
 				{
 					Application.Exit();
 				}
@@ -177,7 +203,7 @@ namespace AepSelector
 				this.Location = new Point(ax + this.Left, ay + this.Top);
 			}
 			base.OnMouseMove(e);
-		}       
+		}
 		// *******************************************************************************
 		private int m_CaptiobHeight = 24;
 		private int m_SideMargin = 8;
@@ -191,18 +217,46 @@ namespace AepSelector
 		// *******************************************************************************
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
+			Debug.WriteLine($"kd:{e.KeyData}");
 			base.OnKeyDown(e);
-			if(e.KeyData == Keys.Escape)
+			if (e.KeyData == Keys.Escape)
 			{
 				Application.Exit();
 			}
+		}
+		protected override void OnGotFocus(EventArgs e)
+		{
+			base.OnGotFocus(e);
+			if (m_AEIconPanel != null)
+			{
+				if (m_AEIconPanel.Focused == false)
+				{
+					m_AEIconPanel.Focus();
+				}
+			}
+
+		}
+		protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+		{
+			Debug.WriteLine($"pkd:{e.KeyData}");
+			if (m_AEIconPanel != null)
+			{
+				if (m_AEIconPanel.Focused == false)
+				{
+					m_AEIconPanel.Focus();
+				}
+				if (e.KeyData == Keys.Left)
+				{
+				}
+			}
+			base.OnPreviewKeyDown(e);
 		}
 		// *******************************************************************************
 		protected override void OnPaint(PaintEventArgs e)
 		{
 
 			Graphics g = e.Graphics;
-			SolidBrush sb =new SolidBrush(ForeColor);
+			SolidBrush sb = new SolidBrush(ForeColor);
 			Pen p = new Pen(ForeColor);
 			try
 			{
@@ -212,33 +266,33 @@ namespace AepSelector
 				p.Width = 2;
 				p.Color = m_KagiColor;
 				Point[] pnts = new Point[3];
-				pnts[0] = new Point(1 ,m_KagiHeight + m_CaptiobHeight+1);
-				pnts[1] = new Point(1, m_CaptiobHeight+1);
+				pnts[0] = new Point(1, m_KagiHeight + m_CaptiobHeight + 1);
+				pnts[1] = new Point(1, m_CaptiobHeight + 1);
 				pnts[2] = new Point(m_KagiWidth, m_CaptiobHeight + 1);
-				g.DrawLines(p,pnts);
-				pnts[0] = new Point(this.Width- m_KagiWidth, m_CaptiobHeight + 1);
+				g.DrawLines(p, pnts);
+				pnts[0] = new Point(this.Width - m_KagiWidth, m_CaptiobHeight + 1);
 				pnts[1] = new Point(this.Width - 1, m_CaptiobHeight + 1);
 				pnts[2] = new Point(this.Width - 1, m_KagiHeight + m_CaptiobHeight + 1);
 				g.DrawLines(p, pnts);
-				pnts[0] = new Point(1, this.Height - m_KagiHeight-1);
-				pnts[1] = new Point(1, this.Height -1);
+				pnts[0] = new Point(1, this.Height - m_KagiHeight - 1);
+				pnts[1] = new Point(1, this.Height - 1);
 				pnts[2] = new Point(m_KagiWidth, this.Height - 1);
 				g.DrawLines(p, pnts);
-				pnts[0] = new Point(this.Width- m_KagiWidth-1, this.Height -1);
-				pnts[1] = new Point(this.Width-1, this.Height - 1);
-				pnts[2] = new Point(this.Width- 1, this.Height - m_KagiHeight -1);
+				pnts[0] = new Point(this.Width - m_KagiWidth - 1, this.Height - 1);
+				pnts[1] = new Point(this.Width - 1, this.Height - 1);
+				pnts[2] = new Point(this.Width - 1, this.Height - m_KagiHeight - 1);
 				g.DrawLines(p, pnts);
 
 				sb.Color = ForeColor;
 				r = new Rectangle(m_SideMargin, (m_CaptiobHeight - m_DotWidth) / 2, m_DotWidth, m_DotWidth);
 				g.FillRectangle(sb, r);
-				r = new Rectangle(m_SideMargin+ m_DotWidth+4, 0, this.Width- (m_SideMargin*2+ m_DotWidth+4), 24);
+				r = new Rectangle(m_SideMargin + m_DotWidth + 4, 0, this.Width - (m_SideMargin * 2 + m_DotWidth + 4), 24);
 				StringFormat sf = new StringFormat();
 				sf.Alignment = StringAlignment.Near;
 				sf.LineAlignment = StringAlignment.Center;
 				g.DrawString(this.Text, this.Font, sb, r, sf);
 				sb.Color = m_CloseAreaColor;
-				r = new Rectangle(this.Width - m_CaptiobHeight +m_DotWidth/2, (m_CaptiobHeight - m_DotWidth) / 2, m_DotWidth, m_DotWidth);
+				r = new Rectangle(this.Width - m_CaptiobHeight + m_DotWidth / 2, (m_CaptiobHeight - m_DotWidth) / 2, m_DotWidth, m_DotWidth);
 				g.FillRectangle(sb, r);
 
 			}
@@ -249,63 +303,7 @@ namespace AepSelector
 			base.OnPaint(e);
 
 		}
-		// *******************************************************************************
-		static public void ArgumentPipeServer(string pipeName)
-		{
-			Task.Run(() =>
-			{ //Taskを使ってクライアント待ち
-				while (_execution)
-				{
-					//複数作ることもできるが、今回はwhileで1つずつ処理する
-					using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1))
-					{
-						// クライアントの接続待ち
-						pipeServer.WaitForConnection();
 
-						StreamString ssSv = new StreamString(pipeServer);
-
-						while (true)
-						{ //データがなくなるまで                       
-							string read = ssSv.ReadString(); //クライアントの引数を受信 
-							if (string.IsNullOrEmpty(read))
-								break;
-
-							//引数が受信できたら、Applicationに登録されているだろうForm1に引数を送る
-							FormCollection apcl = Application.OpenForms;
-
-							if (apcl.Count > 0)
-								((AEForm)apcl[0]).Command(read.Split(";"), PIPECALL.DoubleExec); //取得した引数を送る
-
-							if (!_execution)
-								break; //起動停止？
-						}
-#pragma warning disable CS8600 // Null リテラルまたは Null の可能性がある値を Null 非許容型に変換しています。
-						ssSv = null;
-#pragma warning restore CS8600 // Null リテラルまたは Null の可能性がある値を Null 非許容型に変換しています。
-					}
-				}
-			});
-		}
-		// ******************************************************************************
-		public static Task ArgumentPipeClient(string pipeName, string[] args)
-		{
-			return Task.Run(() =>
-			{ //Taskを使ってサーバに送信waitで処理が終わるまで待つ
-				using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.None, System.Security.Principal.TokenImpersonationLevel.Impersonation))
-				{
-					StreamString ssCl;
-					string writeData;
-					pipeClient.Connect();
-
-					ssCl = new StreamString(pipeClient);
-					writeData = string.Join(";", args); //送信する引数
-					ssCl.WriteString(writeData);
-#pragma warning disable CS8600 // Null リテラルまたは Null の可能性がある値を Null 非許容型に変換しています。
-					ssCl = null;
-#pragma warning restore CS8600 // Null リテラルまたは Null の可能性がある値を Null 非許容型に変換しています。
-				}
-			});
-		}
 
 		private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
 		{
@@ -360,56 +358,53 @@ namespace AepSelector
 
 		private void autoQuitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ToolStripMenuItem item =(ToolStripMenuItem)sender;
+			ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
 			item.Checked = !item.Checked;
-			if(m_AEIconPanel!=null)
+			if (m_AEIconPanel != null)
 			{
 				m_AEIconPanel.AutoQuit = item.Checked;
 			}
 		}
 
-	}
-	// ********************************************************************
-	public class StreamString
-	{
-		private System.IO.Stream ioStream;
-		private System.Text.UnicodeEncoding streamEncoding;
-		public StreamString(System.IO.Stream ioStream)
+		private void topMostToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.ioStream = ioStream;
-			streamEncoding = new System.Text.UnicodeEncoding();
+			this.TopMost = !this.TopMost;
+			topMostToolStripMenuItem.Checked = this.TopMost;
+		}
+		public void MakeSC()
+		{
+			string shortcutPath = System.IO.Path.Combine(
+				Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory),
+				@"AepSelector.lnk");
+			string targetPath = Application.ExecutablePath;
+
+			//WshShellを作成
+			Type t = Type.GetTypeFromCLSID(new Guid("72C24DD5-D70A-438B-8A42-98424B88AFB8"));
+			dynamic shell = Activator.CreateInstance(t);
+
+			//WshShortcutを作成
+			var shortcut = shell.CreateShortcut(shortcutPath);
+
+			//リンク先
+			shortcut.TargetPath = targetPath;
+			//アイコンのパス
+			shortcut.IconLocation = Application.ExecutablePath + ",0";
+			//その他のプロパティも同様に設定できるため、省略
+			shortcut.Arguments = "\"%1\"";
+			shortcut.WorkingDirectory = Application.StartupPath;
+
+			//ショートカットを作成
+			shortcut.Save();
+
+			//後始末
+			System.Runtime.InteropServices.Marshal.FinalReleaseComObject(shortcut);
+			System.Runtime.InteropServices.Marshal.FinalReleaseComObject(shell);
 		}
 
-		// ********************************************************************
-		public string ReadString()
+		private void shortcutToDesktopToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int len = 0;
-			len = ioStream.ReadByte() * 256; //テキスト長
-			len += ioStream.ReadByte(); //テキスト長余り
-			if (len > 0)
-			{ //テキストが格納されている
-				byte[] inBuffer = new byte[len];
-				ioStream.Read(inBuffer, 0, len); //テキスト取得
-				return streamEncoding.GetString(inBuffer);
-			}
-			else //テキストなし
-				return "";
-		}
-		// ********************************************************************
-		public int WriteString(string outString)
-		{
-			if (string.IsNullOrEmpty(outString))
-				return 0;
-			byte[] outBuffer = streamEncoding.GetBytes(outString);
-			int len = outBuffer.Length; //テキストの長さ
-			if (len > UInt16.MaxValue)
-				len = (int)UInt16.MaxValue; //65535文字
-			ioStream.WriteByte((byte)(len / 256)); //テキスト長
-			ioStream.WriteByte((byte)(len & 255)); //テキスト長余り
-			ioStream.Write(outBuffer, 0, len); //テキストを格納
-			ioStream.Flush();
-			return outBuffer.Length + 2; //テキスト＋２(テキスト長)
+			MakeSC();
 		}
 	}
 	// ********************************************************************

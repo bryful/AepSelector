@@ -7,9 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64</Platforms>
     <Win32Resource>Icon.res</Win32Resource>
     <UseWPF>False</UseWPF>
+    <Title>AepSelectot</Title>
+    <Company>bry-ful</Company>
+    <Authors>bry-ful</Authors>
+    <Description>AepSelector</Description>
+    <Copyright>bry-ful copyright(c) 2023</Copyright>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

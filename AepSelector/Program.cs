@@ -11,32 +11,36 @@ namespace AepSelector
 
 	internal static class Program
 	{
-		private const string ApplicationId = "AepSelector"; // GUIDなどユニークなもの
-		private static System.Threading.Mutex _mutex = new System.Threading.Mutex(false, ApplicationId);
+		private const string Id = "AepSelector"; // GUIDなどユニークなもの
+		private static System.Threading.Mutex _mutex = new System.Threading.Mutex(false, Id);
 
 		// *******************************************************************************************
 		[STAThread]
 		static void Main(string[] args)
 		{
-			// 通常の起動
-			//ApplicationConfiguration.Initialize();
-			//Application.Run(new Form1());
+			bool IsRunning = (_mutex.WaitOne(0, false)) == false;
 
-			if (_mutex.WaitOne(0, false))
-			{//起動していない
-				AEForm._execution = true;
-				AEForm.ArgumentPipeServer(ApplicationId);
+			if (IsRunning == false)
+			{
+				//起動していない
+				//　通常起動
+				// To customize application configuration such as set high DPI settings or default font,
+				// see https://aka.ms/applicationconfiguration.
 				ApplicationConfiguration.Initialize();
-				Application.Run(new MainForm());
-				AEForm._execution = false;
+				MainForm mf = new MainForm();
+				mf.StartServer(Id);
+				Application.Run(mf);
+				mf.StopServer();
 			}
 			else
-			{ //起動している
-			  //MessageBox.Show("すでに起動しています",
-			  //				ApplicationId,
-			  //				MessageBoxButtons.OK, MessageBoxIcon.Hand);
+			{
+				//起動している
+				//MessageBox.Show("すでに起動しています",
+				//				ApplicationId,
+				//				MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
-				AEForm.ArgumentPipeClient(ApplicationId, args).Wait();
+				PipeData pd = new PipeData(args, PIPECALL.DoubleExec);
+				F_Pipe.Client(Id, pd.ToJson()).Wait();
 			}
 		}
 	}

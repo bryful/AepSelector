@@ -211,7 +211,18 @@ namespace AepSelector
 				TargetIndex = icon.ID;
 			}
 		}
-
+		protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+		{
+			Debug.WriteLine($"kdpp:{e.KeyData}:{TargetIndex}/{this.Focused}");
+			if ((this.Controls.Count > 0))
+			{
+				TargetIndex = 0;
+			}
+			else
+			{
+				base.OnPreviewKeyDown(e);
+			}
+		}
 		private void Icon_AepChanged(object sender, StringChangeArgs e)
 		{
 			string p = e.Name;

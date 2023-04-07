@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AepSelector2", "AepSelector2\AepSelector2.csproj", "{5B524AFB-115C-458D-BCA4-EC0A01E22C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AepSelector", "AepSelector\AepSelector.csproj", "{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AepSelector", "AepSelector\AepSelector.csproj", "{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AepSelector Setup", "AepSelector Setup\AepSelector Setup.vdproj", "{810746C9-5988-42C3-8C54-6E7B081F1362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|x64.ActiveCfg = Debug|x64
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|x64.Build.0 = Debug|x64
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|x86.ActiveCfg = Debug|x86
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Debug|x86.Build.0 = Debug|x86
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|x64.ActiveCfg = Release|x64
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|x64.Build.0 = Release|x64
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|x86.ActiveCfg = Release|x86
-		{5B524AFB-115C-458D-BCA4-EC0A01E22C49}.Release|x86.Build.0 = Release|x86
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Debug|x64.ActiveCfg = Debug|x64
@@ -41,6 +29,12 @@ Global
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Release|x64.Build.0 = Release|x64
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Release|x86.ActiveCfg = Release|x86
 		{E3BE6B8E-8EDD-4015-8C4B-C41594CB4311}.Release|x86.Build.0 = Release|x86
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Debug|Any CPU.ActiveCfg = Debug
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Debug|x64.ActiveCfg = Debug
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Debug|x86.ActiveCfg = Debug
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Release|Any CPU.ActiveCfg = Release
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Release|x64.ActiveCfg = Release
+		{810746C9-5988-42C3-8C54-6E7B081F1362}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

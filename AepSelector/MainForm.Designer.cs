@@ -28,33 +28,34 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.aeIconPanel1 = new AepSelector.AEIconPanel();
-			this.SuspendLayout();
+			aeIconPanel1 = new AEIconPanel();
+			SuspendLayout();
 			// 
 			// aeIconPanel1
 			// 
-			this.aeIconPanel1.AepPath = "";
-			this.aeIconPanel1.AfterFXPath = "";
-			this.aeIconPanel1.BackColor = System.Drawing.Color.Transparent;
-			this.aeIconPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.aeIconPanel1.Location = new System.Drawing.Point(8, 24);
-			this.aeIconPanel1.Name = "aeIconPanel1";
-			this.aeIconPanel1.Size = new System.Drawing.Size(349, 64);
-			this.aeIconPanel1.TabIndex = 0;
-			this.aeIconPanel1.TargetIndex = -1;
-			this.aeIconPanel1.Text = "aeIconPanel1";
+			aeIconPanel1.AepPath = "";
+			aeIconPanel1.AfterFXPath = "";
+			aeIconPanel1.BackColor = Color.Transparent;
+			aeIconPanel1.ForeColor = Color.FromArgb(200, 200, 255);
+			aeIconPanel1.Location = new Point(8, 24);
+			aeIconPanel1.MinimumSize = new Size(320, 64);
+			aeIconPanel1.Name = "aeIconPanel1";
+			aeIconPanel1.Size = new Size(320, 64);
+			aeIconPanel1.TabIndex = 0;
+			aeIconPanel1.TargetIndex = -1;
+			aeIconPanel1.Text = "aeIconPanel1";
 			// 
 			// MainForm
 			// 
-			this.AEIconPanel = this.aeIconPanel1;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(384, 88);
-			this.Controls.Add(this.aeIconPanel1);
-			this.Name = "MainForm";
-			this.Text = "MainForm";
-			this.ResumeLayout(false);
-
+			AEIconPanel = aeIconPanel1;
+			AutoScaleDimensions = new SizeF(9F, 21F);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new Size(336, 88);
+			Controls.Add(aeIconPanel1);
+			Name = "MainForm";
+			StartPosition = FormStartPosition.Manual;
+			Text = "MainForm";
+			ResumeLayout(false);
 		}
 
 		#endregion
