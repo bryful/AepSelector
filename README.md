@@ -3,7 +3,7 @@
 複数のバージョンのAfter Effectsを切り替えて起動するアプリ<br>
   <br>
 バージョンアップしました。<br>
-
+右にあるReleasesからダウンロードしてください。<br>
 
 # Dependency
 Visual studio 2022 C#
